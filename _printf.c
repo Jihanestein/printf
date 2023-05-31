@@ -7,6 +7,12 @@ void print_buffer(char buffer[], int *buff_ind);
 /**
   *_printf - printf fucntion
   * @format: format
+  *print_buffer - fucntions that print buffer content
+  *get_flags - get flags
+  *get_width - get width
+  *get_precision - get precision
+  *get_size - get size
+  *handle_print - print handle print
   * Return: character printed
   */
 
