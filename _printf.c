@@ -1,76 +1,73 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-
-void print_buffer(char buffer[], int *buff_ind);
+#include <stdlib.h>
 
 /**
-  *_printf - printf fucntion
-  * @format: format
-  *print_buffer - fucntions that print buffer content
-  *get_flags - get flags
-  *get_width - get width
-  *get_precision - get precision
-  *get_size - get size
-  *handle_print - print handle print
-  * Return: character printed
+  *_printf - formated output conversion and print data.
+  * @format: input string.
+  *
+  * Return: number of char printed.
   */
 
+void print_buf(char *buffer, unsigned int ibuf);
+void handl_buf(char *buffer, char format, unsigned int ibuf);
+int (*get_print_func(const char *format, int index))(va_list, char *, unsigned int);
+int ev_print_func(const char *format, int index);
 int _printf(const char *format, ...)
 {
-	int a;
-	int output = 0;
-	int print_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
-	va_list printlist;
-	char buffer[BUFF_SIZE];
+	unsigned int i = 0, len = 0, ibuf = 0;
+	va_list arguments;
+	int (*function)(va_list, char *, unsigned int);
+	char *buffer;
 
-	if (format == NULL)
+	buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
 		return (-1);
 
-	va_start(printlist, format);
-
-	for (a = 0; format && format[a] != '\0'; a++)
+	va_start(arguments, format);
+	if (!format[i])
 	{
-		if (format[a] != '%')
+		va_end(arguments);
+		free(buffer);
+		return (0);
+	}
+
+	for (i = 0; format && format[i]; i++)
+	{
+		if (format[i] == '%')
 		{
-			buffer[buff_ind++] = format[a];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			/*print(1, &format[a], 1);*/
-			print_chars++;
+			if (format[i + 1] == '\0')
+			{
+				print_buf(buffer, ibuf);
+				free(buffer);
+				va_end(arguments);
+				return (-1);
+			}
+			else
+			{
+				function = get_print_func(format, i + 1);
+				if (function == NULL)
+				{
+					if (format[i + 1] == ' ' &&!format[i + 2])
+						return (-1);
+					handl_buf(buffer, format[i], ibuf), len++, i--;
+				}
+				else
+				{
+					len += function(arguments, buffer, ibuf);
+					i += ev_print_func(format, i + 1);
+				}
+			}
+			i++;
 		}
 		else
 		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &a);
-			width = get_width(format, &a, printlist);
-			precision = get_precision(format, &a, printlist);
-			size = get_size(format, &a);
-			a++;
-			output = handle_print(format, &a, printlist, buffer,
-				flags, width, precision, size);
-			if (output == -1)
-				return (-1);
-			print_chars += output;
+			handl_buf(buffer, format[i], ibuf), 
+			len++;
 		}
 	}
-
-	print_buffer(buffer, &buff_ind);
-	va_end(printlist);
-	return (print_chars);
-}
-
-/**
-  *print_buffer - print buffer content if it exict
-  *@buffer: array of chars
-  *@buff_ind: represent the lenght, index to add next char
-  */
-
-void print_buffer(char buffer[], int *buff_ind)
-{
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
-
-	*buff_ind = 0;
+	print_buf(buffer, ibuf);
+	free(buffer);
+	va_end(arguments);
+	
+	return (len);
 }
