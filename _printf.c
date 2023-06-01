@@ -1,4 +1,6 @@
-#include "main.h"
+#include "myfunctions0.h"
+#include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -8,10 +10,6 @@
   * Return: number of char printed.
   */
 
-void print_buf(char *buffer, unsigned int ibuf);
-void handl_buf(char *buffer, char format, unsigned int ibuf);
-int (*get_print_func(const char *format, int index))(va_list, char *, unsigned int);
-int ev_print_func(const char *format, int index);
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, len = 0, ibuf = 0;
