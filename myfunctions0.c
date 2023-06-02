@@ -63,9 +63,9 @@ int (*get_print_func(const char *format, int index))(va_list arguments, char *bu
  */
 void handl_buf(char *buffer, char format, unsigned int size)
 {
-        (void)buffer;
-        (void)format;
-        (void)size;
+	(void)buffer;
+	(void)format;
+	(void)size;
 }
 
 /**
@@ -76,7 +76,7 @@ void handl_buf(char *buffer, char format, unsigned int size)
  */
 int ev_print_func(const char *format, int index)
 {
-        (void)format;
-        (void)index;
-        return (0);
+	(void)format;
+	(void)index;
+	return (0);
 }
