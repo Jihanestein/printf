@@ -42,10 +42,10 @@ int _puts(const char *str)
  */
 int (*get_print_func(const char *format, int index))(va_list arguments, char *buffer, unsigned int ibuf)
 {
-        (void)format;
-        (void)index;
+	(void)format;
+	(void)index;
 
-        return (NULL);
+	return (NULL);
 }
 
 /**
@@ -56,8 +56,7 @@ int (*get_print_func(const char *format, int index))(va_list arguments, char *bu
  */
 int ev_print_func(const char *format, int index)
 {
-        (void)format;
-        (void)index;
-        return (0);
+	(void)format;
+	(void)index;
+	return (0);
 }
-
