@@ -2,7 +2,7 @@
 
 /**
   *print_char - prints a char
-  *@types: list if arg
+  *@types: list of arg
   *@buffer: handle print
   *@flags: active flags
   *@width: width
