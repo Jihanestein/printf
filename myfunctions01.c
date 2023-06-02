@@ -33,3 +33,31 @@ int _puts(const char *str)
 	}
 
 	return (count);
+
+/**
+ * get_print_func - A function that retrieves the print function
+ * @format: The format specifier
+ * @index: the index
+ * Return: The pointer to the print function
+ */
+int (*get_print_func(const char *format, int index))(va_list arguments, char *buffer, unsigned int ibuf)
+{
+        (void)format;
+        (void)index;
+
+        return (NULL);
+}
+
+/**
+ * ev_print_func - Event print function
+ * @format: The format specifier
+ * @index: The index
+ * Return: Always 0 on success
+ */
+int ev_print_func(const char *format, int index)
+{
+        (void)format;
+        (void)index;
+        return (0);
+}
+
