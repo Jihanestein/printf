@@ -2,14 +2,12 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 /**
   *_printf - formated output conversion and print data.
   * @format: input string.
   *
   * Return: number of char printed.
   */
-
 int _printf(const char *format, ...)
 {
 	unsigned int i = 0, len = 0, ibuf = 0;
@@ -20,7 +18,6 @@ int _printf(const char *format, ...)
 	buffer = malloc(sizeof(char) * 1024);
 	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
 		return (-1);
-
 	va_start(arguments, format);
 	if (!format[i])
 	{
@@ -28,7 +25,6 @@ int _printf(const char *format, ...)
 		free(buffer);
 		return (0);
 	}
-
 	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -66,6 +62,5 @@ int _printf(const char *format, ...)
 	print_buf(buffer, ibuf);
 	free(buffer);
 	va_end(arguments);
-
 	return (len);
 }
