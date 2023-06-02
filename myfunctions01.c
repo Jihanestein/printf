@@ -3,11 +3,11 @@
 #include <unistd.h>
 
 /**
- * _putchar - writes a caharacter to the standard output
+ * _putchar - writes a character to the standard output
  * Return: 1 upon successful completion
  * @c: The character to be written
  */
-int _putchar(char c)
+int _putchar(int c)
 {
 	return (write(1, &c, 1));
 }
@@ -26,13 +26,14 @@ int _puts(const char *str)
 
 	while (*str != '\0')
 	{
-		if (_putchar(str) < 0)
+		if (_putchar(*str) < 0)
 			return (-1);
 		count++;
 		str++;
 	}
 
 	return (count);
+}
 
 /**
  * get_print_func - A function that retrieves the print function
