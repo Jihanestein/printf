@@ -1,44 +1,55 @@
 #include "myfunctions0.h"
 #include <stddef.h>
 
-void handle_write_char(char c) {
-  /* marking the parametre unused */
-  (void)c; /* Marking the parameter as unused */
+
+/**
+ * handle_write_char - a function that handles writing a character
+ * @c: The character to be written
+ */
+void handle_write_char(char c)
+{
+	(void)c;
 }
 
-void convert_size_number(int num) {
-  /* Implementation of convert_size_number function */
-  (void)num; /* Marking the parameter as unused */
+/**
+ * convert_size_number - a function that converts a size number
+ * @num: The number to converted
+ */
+void convert_size_number(int num)
+{
+	(void)num;
 }
 
-void write_number(int num) {
-  /* Implementation of write_number function */
-  (void)num; /* Marking the parameter as unused */
+/**
+ * write_number - a function that writes a number
+ * @num: The number to be written
+ */
+void write_number(int num)
+{
+	(void)num;
 }
 
-void print_buf(char *buffer, unsigned int size) {
-  /* Implementation of print_buf function */
-  (void)buffer; /* Marking the parameter as unused */
-  (void)size; /* Marking the parameter as unused */
+/**
+ * print_buf - A function that prints a buffer
+ * @buffer: The buffer to printed
+ * @size: The size of the buffer
+ */
+void print_buf(char *buffer, unsigned int size)
+{
+	(void)buffer;
+	(void)size;
 }
 
-int (*get_print_func(const char *format, int index))(va_list arguments, char *buffer, unsigned int ibuf) {
-  /* Implementation of get_print_func function */
-  (void)format; /* Marking the parameter as unused */
-  (void)index; /* Marking the parameter as unused*/
-  return NULL;
-}
 
-void handl_buf(char *buffer, char format, unsigned int size) {
-  /* Implementation of handl_buf function */
-  (void)buffer; /* Marking the parameter as unused */
-  (void)format; /* Marking the parameter as unused */
-  (void)size; /* Marking the parameter as unused */
-}
-
-int ev_print_func(const char *format, int index) {
-  /* Implementation of ev_print_func function */
-  (void)format; /* Marking the parameter as unused */
-  (void)index; /* Marking the parameter as unused */
-  return 0;
+/**
+ * handl_buf - A funcntion that handles a buffer
+ * @buffer: The buffer to be handled
+ * @format: The format specifier
+ * @size: The size of the buffer
+ */
+void handl_buf(char *buffer, char format, unsigned int size)
+{
+	(void)buffer;
+	(void)format;
+	(void)size;
 }

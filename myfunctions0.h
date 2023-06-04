@@ -2,6 +2,8 @@
 #define MYFUNCTIONS0_H
 #include <stdarg.h>
 
+int _putchar(int c);
+int _puts(const char *str);
 void handle_write_char(char c);
 void convert_size_number(int num);
 void write_number(int num);
