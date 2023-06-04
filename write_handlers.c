@@ -132,7 +132,7 @@ int write_num(int ind, char buffer[],
 		if (extra_c)
 			buffer[--padd_start] = extra_c;
 		return (write(1, &buffer[padd_start], i - padd_start) +
-				write(1, &buffer[ind], length - 1(1 - padd_start)));
+				write(1, &buffer[ind], length - 1 * (1 - padd_start)));
 	}
 	}
 	if (extra_c)
@@ -163,7 +163,7 @@ int write_unsgnd(int is_negative, int ind,
 	UNUSED(is_negative);
 	UNUSED(size);
 
-	if (precision == 0 && ind BUFF_SIZE - 2 && buffer[ind] == '0')
+	if (precision == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
 		return (0);/*print(".0d",0) no chat printed*/
 	if (precision > 0 && precision < length)
 		padd = ' ';
@@ -181,7 +181,7 @@ int write_unsgnd(int is_negative, int ind,
 		buffer[i] = '\0';
 		if (flags & F_MINUS)/*asign extra char to left of buffer*/
 		{
-			return (write(1, &buffer[ind] length) + write(1, &buffer[0], i));
+			return (write(1, &buffer[ind], length) + write(1, &buffer[0], i));
 		}
 		else /*asign extra char to left of padding*/
 		{
