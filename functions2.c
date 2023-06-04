@@ -38,7 +38,7 @@ int ind = BUFF_SIZE - 2, length = 2, padd_start = 1; /* length=2, for '0x' */
 		length++;
 	}
 
-	if ((flags & F_ZERO) && !(flags & F_minus))
+	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		padd = '0';
 	if (flags & F_PLUS)
 		extra_c = '+', length++;
