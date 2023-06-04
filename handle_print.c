@@ -12,41 +12,28 @@
   * @size: size specifier
   * Return: numberof chars printed or -1 on error
   */
-int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
+int handle_print(const char *fmt, int *i, va_list list, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	int unknown_len = 0;
-	int i;
-
-	struct fmt_t
-	{
-		char fmt;
-		int (*fn)(va_list, char *, int, int, int, int);
-	};
-
-	struct fmt_t fmt_types[] = {
+	int j;
+	fmt_t fmt_types[] = {
 		{'c', print_char}, {'s', print_string}, {'%', print_percent},
 		{'i', print_int}, {'d', print_int}, {'b', print_binary},
 		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
 		{'X', print_hexadecimal}, {'p', print_pointer}, {'S', print_non_printable},
 		{'R', print_rot13string}, {'\0', NULL}
 	};
-	for (i = 0; fmt_types[i].fmt != '\0'; i++)
+	for (j = 0; fmt_types[j].fmt != '\0'; j++)
 	{
-		if (fmt[*ind] == fmt_types[i].fmt)
+		if (fmt[*i] == fmt_types[j].fmt)
 		{
-			return (fmt_types[i].fn(list, buffer, flags, width, precision, size));
+			return fmt_types[j].fn(list, buffer, flags, width, precision, size);
 		}
-	};
-
-	for (i = 0; fmt_types[i].fmt != '\0'; i++)
-	{
-		if (fmt[*ind] == fmt_types[i].fmt)
-			return (fmt_types[i].fn(list, buffer, flags, width, precision, size));
 	}
-	if (fmt_types[i].fmt == '\0')
+	if (fmt_types[j].fmt == '\0')
 	{
-		if (fmt[*ind] == '\0')
+		if (fmt[*i] == '\0')
 		{
 			return (-1);
 		}
@@ -55,18 +42,28 @@ int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
 	}
 	else if (width)
 	{
-		--(*ind);
-		while (fmt[*ind] != ' ' && fmt[*ind] != '%')
-		{
-			--(*ind);
-		}
-		if (fmt[*ind] == ' ')
-		{
-			--(*ind);
-		}
-		return (1);
+		unknown_len = handle_width(fmt, i);
+		return (unknown_len);
 	}
-
-	unknown_len += write(1, &fmt[*ind], 1);
+	unknown_len += write(1, &fmt[*i], 1);
 	return (unknown_len);
+}
+/**
+  * handle_width - handler the width specfier int the format string
+  * @fmt: formatting string
+  * @i: pointer
+  * Return: 1
+  */
+int handle_width(const char *fmt, int *i)
+{
+	--(*i);
+	while (fmt[*i] != ' ' && fmt[*i] != '%')
+	{
+		--(*i);
+	}
+	if (fmt[*i] == ' ')
+	{
+		--(*i);
+	}
+	return (1);
 }
