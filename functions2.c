@@ -1,57 +1,5 @@
 #include "main.h"
 
-/********** WRITER POINTER ************/
-/**
- * writer_pointer - writes the formatted pointer value to the buffer
- * @buffer: buffer array to handle print
- * @ind: index to start writing in the buffer
- * @length: length of the pointer value
- * @width: width specification
- * @flags: calculates active flags
- * @padd: padding character
- * @extra_c: extra character
- * @padd_start: padding start position
- * Return: Number of chars written
- */
-int write_pointer(char buffer[], int ind, int length, int width,
-		int flags, char padd, char extra_c)
-{
-	int chars_written = 0;
-		int padding = width - length;
-
-	if (!(flags & F_MINUS))
-	{
-		while (padding-- > 0)
-			buffer[ind++] = padd;
-	}
-
-	if (flags & F_PLUS)
-		buffer[ind++] = extra_c;
-
-	buffer[ind++] = '0';
-	buffer[ind++] = 'x';
-	chars_written += ind;
-
-	while (ind < BUFF_SIZE - 1)
-	{
-		write(1, &buffer[ind], 1);
-		chars_written++;
-		ind++;
-	}
-
-	if (flags & F_MINUS)
-	{
-		while (padding-- > 0)
-		{
-			write(1, &padd, 1);
-			chars_written++;
-		}
-	}
-
-	return (chars_written);
-}
-
-
 /************ PRINT POINTER *************/
 /**
  * print_pointer - prints the value of a pointer variable
@@ -100,7 +48,7 @@ int ind = BUFF_SIZE - 2, length = 2, padd_start = 1; /* length=2, for '0x' */
 
 	/* return (write(1, &buffer[i], BUFF_SIZE - i - 1)); */
 	return (write_pointer(buffer, ind, length,
-		width, flags, padd, extra_c, padd_start));
+				width, flags, padd, extra_c, padd_start));
 }
 
 /************* PRINT NON PRINTABLE *************/
