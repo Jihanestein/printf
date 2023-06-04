@@ -13,7 +13,7 @@
   * Return: 1 or 2
   */
 
-int handle_prin(const char *fmt, int *ind, va_list list, char buffer[],
+int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
 		int flags, int width, int precision, int size)
 {
 	int i, unknow_len = 0, printed_chars = -1;
@@ -32,6 +32,7 @@ int handle_prin(const char *fmt, int *ind, va_list list, char buffer[],
 		if (fmt[*ind] == '\0')
 			return (-1);
 		unknow_len += write(1, " ", 1);
+	}
 		else if (width)
 		{
 			--(*ind);
