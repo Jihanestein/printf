@@ -4,7 +4,7 @@
   * handle_print - prints an argument based on its type
   * @fmt: formatted string in which to print arg
   * @list: list of arguments to be printed
-  * @ind: ind
+  * @i: pointer
   * @buffer: buffer array to handle print
   * @flags: calculate active flags
   * @width: get width
@@ -28,7 +28,7 @@ int handle_print(const char *fmt, int *i, va_list list, char buffer[],
 	{
 		if (fmt[*i] == fmt_types[j].fmt)
 		{
-			return fmt_types[j].fn(list, buffer, flags, width, precision, size);
+			return (fmt_types[j].fn(list, buffer, flags, width, precision, size));
 		}
 	}
 	if (fmt_types[j].fmt == '\0')
