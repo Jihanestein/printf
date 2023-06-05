@@ -86,8 +86,8 @@ int print_octal(va_list types, char buffer[],
 int print_hexadecimal(va_list types, char *buffer,
 		int flags, int width, int precision, int size)
 {
-	return print_hexa(types, "0123456789abcdef", buffer,
-				flags, width, precision, size);
+	return (print_hexa(types, "0123456789abcdef", buffer,
+				flags, width, precision, size));
 }
 /**********PRINT HEXX NUM IN LOWER OR UPPER******/
 /**
@@ -96,7 +96,6 @@ int print_hexadecimal(va_list types, char *buffer,
   * @map_to: Array of values to map the number to
   * @buffer: buffer array to handle pront
   * @flags: calculate active flags
-  * @flag_h: calculate active flags
   * @width: get width
   * @precision: precision specification
   * @size: size specifier
